@@ -8,8 +8,9 @@ import { RevAiApiClient } from 'revai-node-sdk';
 export const transcribeAudio = async (req, res) => {
     const ACCESS_TOKEN = process.env.REV_AI_ACCESS_TOKEN;
     let client = new RevAiApiClient(ACCESS_TOKEN);
-    let body = JSON.parse(req.body);
 
+    console.log(req.body);
+    let body = JSON.parse(req.body);
     console.log(body);
     
     var job = await client.submitJobUrl(body.audioUrl);
