@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (app) => {
-    let transcriptController = require('../controller/transcription-controller');
+    let transcriptController = require('../controller/transcription-controller.mjs');
 
     // Route for transcribing audio (POST)
     app.route('/audio/transcribe')
