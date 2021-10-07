@@ -13,7 +13,7 @@ export const transcribeAudio = async (req, res) => {
         console.log(req.body);
         
         var job = await client.submitJobUrl(req.body.audioUrl);
-        // var details = await client.getJobDetails(job.id);
+        var details = await client.getJobDetails(job.id);
         var transcript = await client.getTranscriptText(job.id);
 
         console.log(transcript);
