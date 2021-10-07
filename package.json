@@ -1,12 +1,11 @@
 {
   "name": "read_and_learn_rest_api",
   "version": "1.0.0",
-  "type": "module",
   "description": "REST API for Read and Learn mobile application, this will handle audio transcriptions using rev.ai",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: No test specified\" && exit 1",
-    "start": "node server.cjs"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
