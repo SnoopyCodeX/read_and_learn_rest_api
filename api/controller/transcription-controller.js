@@ -1,11 +1,11 @@
 'use strict';
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-import { RevAiApiClient } from 'revai-node-sdk'; // #-> Having errors kasi bawal daw mag-import if wala sa module
-// const RevAiApiClient = require('revai-node-sdk');
+import { RevAiApiClient } from 'revai-node-sdk';
 
-exports.transcribeAudio = async (req, res) => {
+export const transcribeAudio = async (req, res) => {
     const ACCESS_TOKEN = process.env.REV_AI_ACCESS_TOKEN;
     let client = new RevAiApiClient(ACCESS_TOKEN);
     let body = JSON.parse(req.body);
