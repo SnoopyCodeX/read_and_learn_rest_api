@@ -10,10 +10,8 @@ export const transcribeAudio = async (req, res) => {
     let client = new RevAiApiClient(ACCESS_TOKEN);
 
     console.log(req.body);
-    let body = JSON.parse(req.body);
-    console.log(body);
     
-    var job = await client.submitJobUrl(body.audioUrl);
+    var job = await client.submitJobUrl(req.body.audioUrl);
     // var details = await client.getJobDetails(job.id);
     var transcript = await client.getTranscriptText(job.id);
 
