@@ -8,6 +8,8 @@ exports.transcribeAudio = async (req, res) => {
     let client = new RevAiApiClient(ACCESS_TOKEN);
     let body = JSON.parse(req.body);
 
+    console.log(body);
+
     // Submit audio file to Rev.ai
     var job = await client.submitJobUrl(body.audioUrl);
 
@@ -16,6 +18,8 @@ exports.transcribeAudio = async (req, res) => {
 
     // Retrieve transcript
     var transcript = await client.getTranscriptText(job.id);
+
+    console.log(transcript);
 
     res.json({"transcript": transcript});
 };
