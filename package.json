@@ -1,0 +1,34 @@
+{
+  "name": "read_and_learn_rest_api",
+  "version": "1.0.0",
+  "description": "REST API for Read and Learn mobile application, this will handle audio transcriptions using rev.ai",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: No test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnoopyCodeX/read_and_learn_rest_api.git"
+  },
+  "keywords": [
+    "read_and_learn",
+    "rest",
+    "api",
+    "mobile",
+    "application",
+    "flutter"
+  ],
+  "author": "SnoopyCodeX",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/SnoopyCodeX/read_and_learn_rest_api/issues"
+  },
+  "homepage": "https://github.com/SnoopyCodeX/read_and_learn_rest_api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "revai-node-sdk": "^2.6.3"
+  }
+}
