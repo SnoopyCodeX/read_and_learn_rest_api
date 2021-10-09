@@ -53,10 +53,10 @@ export const transcribeAudio = async (req, res) => {
         }
 
         notify.sendTo(senderId, {
-            transcript: transcript, 
-            status: details.status,
-            fail_type: details.failure,
-            detail: details.failure_detail,
+            "transcript": transcript, 
+            "status": details.status,
+            "fail_type": details.failure,
+            "detail": details.failure_detail,
         });
     } catch(e) {
         console.log(e);
