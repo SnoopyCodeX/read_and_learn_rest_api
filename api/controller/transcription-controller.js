@@ -1,24 +1,63 @@
 'use strict';
 
 import dotenv from 'dotenv';
-dotenv.config();
-
 import { RevAiApiClient } from 'revai-node-sdk';
+import { notificationSender } from '../model/notification-model.js';
+
+dotenv.config();
 
 export const transcribeAudio = async (req, res) => {
     try {
         const ACCESS_TOKEN = process.env.REV_AI_ACCESS_TOKEN;
         let client = new RevAiApiClient(ACCESS_TOKEN);
+        let notify = new notificationSender();
+        let senderId = req.body.userId; // user id as notification id
 
-        console.log(req.body);
+        // Job options
+        let options = {
+            skip_diarization: false,
+            skip_punctuation: true,
+            remove_disfluencies: true,
+            delete_after_seconds: 30
+        };
         
-        var job = await client.submitJobUrl(req.body.audioUrl);
-        var details = await client.getJobDetails(job.id);
-        var transcript = await client.getTranscriptText(job.id);
+        // Submit audio url to Rev.ai
+        let job = await client.submitJobUrl(req.body.audioUrl, options);
 
-        console.log(transcript);
+        // Return temporary status of the job
+        res.json({"status": "in_progress"});
 
-        res.json({"transcript": transcript});
+        // Monitor status of the job until status is 'transcribed' or 'failed'
+        let details = await client.getJobDetails(job.id);
+        while(details.status !== 'transcribed' && details.status !== 'failed')
+            details = await client.getJobDetails(job.id);
+
+        // Get the transcript of the audio
+        let transcriptObj = details.status !== 'transcribed' ? null : await client.getTranscriptObject(details.id);
+        let monologues = transcriptObj?.monologues ?? null;
+        let transcript = "";
+
+        if(monologues != null && monologues.length > 0) {
+            monologues.forEach(monologue => {
+                let elements = monologue.elements;
+
+                if(elements != null && elements.length > 0) {
+                    elements.forEach(element => {
+                        if(element.type != "unknown")
+                            transcript += element.value.toLowerCase() + " ";
+                    });
+
+                    transcript = transcript.substring(0, transcript.length - 1);
+                }
+            });
+        }
+
+        notify.sendTo(senderId, {
+            transcript: transcript, 
+            status: details.status,
+            fail_type: details.failure,
+            detail: details.failure_detail,
+        });
     } catch(e) {
         console.log(e);
     }
