@@ -52,6 +52,8 @@ export const transcribeAudio = async (req, res) => {
             });
         }
 
+        console.log("Sender ID: ", senderId);
+
         notify.sendTo(senderId, {
             "transcript": transcript, 
             "status": details.status,
