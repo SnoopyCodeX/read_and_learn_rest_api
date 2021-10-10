@@ -13,7 +13,7 @@
 ### :door: Gateways
 - Base url
 ```
-https://read_and_learn_api.herokuapp.com
+https://read-and-learn-api.herokuapp.com
 ```
 - Transcribe audio (POST)
 ```
