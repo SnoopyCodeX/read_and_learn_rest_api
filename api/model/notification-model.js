@@ -22,4 +22,4 @@ class NotificationSender {
     }
 }
 
-export const notificationSender = NotificationSender;
+export default NotificationSender;

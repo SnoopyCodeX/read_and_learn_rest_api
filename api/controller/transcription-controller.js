@@ -2,14 +2,14 @@
 
 import dotenv from 'dotenv';
 import { RevAiApiClient } from 'revai-node-sdk';
-import { notificationSender } from '../model/notification-model.js';
+import { NotificationSender } from '../model/notification-model.js';
 
-dotenv.config();
-
+// Transcribes an audio
 export const transcribeAudio = async (req, res) => {
     try {
+        dotenv.config();
         let client = new RevAiApiClient(process.env.REV_AI_ACCESS_TOKEN);
-        let notify = new notificationSender();
+        let notify = new NotificationSender();
         let senderId = req.body.userId; // user id as notification id
 
         // Job options
