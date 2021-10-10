@@ -2,7 +2,7 @@
 
 import dotenv from 'dotenv';
 import { RevAiApiClient } from 'revai-node-sdk';
-import { NotificationSender } from '../model/notification-model.js';
+import NotificationSender from '../model/notification-model.js';
 
 // Transcribes an audio
 export const transcribeAudio = async (req, res) => {
@@ -42,8 +42,8 @@ export const transcribeAudio = async (req, res) => {
 
                 if(elements != null && elements.length > 0) {
                     elements.forEach(element => {
-                        if(element.type != "unknown" && element.type != "punct" && element.confidence >= 0.7)
-                            transcript += element.value.toLowerCase() + " ";
+                        if(element.type != "unknown" && element.type != "punct" && element.confidence >= 0.75)
+                            transcript += `${element.value.toLowerCase()} `;
                     });
 
                     transcript = transcript.substring(0, transcript.length - 1);
