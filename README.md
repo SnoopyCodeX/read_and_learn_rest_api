@@ -7,6 +7,9 @@
 #### :white_check_mark: ExpressJS
 > Used to handle http requests
 
+#### :white_check_mark: Pusher JS
+> Used to trigger events
+
 #### :white_check_mark: Rev.ai
 > Used to transcribe audio files (mp3, aac, etc.)
 
