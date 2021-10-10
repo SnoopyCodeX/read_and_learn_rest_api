@@ -8,8 +8,7 @@ dotenv.config();
 
 export const transcribeAudio = async (req, res) => {
     try {
-        const ACCESS_TOKEN = process.env.REV_AI_ACCESS_TOKEN;
-        let client = new RevAiApiClient(ACCESS_TOKEN);
+        let client = new RevAiApiClient(process.env.REV_AI_ACCESS_TOKEN);
         let notify = new notificationSender();
         let senderId = req.body.userId; // user id as notification id
 
@@ -43,7 +42,7 @@ export const transcribeAudio = async (req, res) => {
 
                 if(elements != null && elements.length > 0) {
                     elements.forEach(element => {
-                        if(element.type != "unknown")
+                        if(element.type != "unknown" && element.type != "punct" && element.confidence >= 0.7)
                             transcript += element.value.toLowerCase() + " ";
                     });
 
@@ -51,8 +50,6 @@ export const transcribeAudio = async (req, res) => {
                 }
             });
         }
-
-        console.log("Sender ID: ", senderId);
 
         notify.sendTo(senderId, {
             "transcript": transcript, 
