@@ -3,13 +3,12 @@
 ### :computer: Technologies Used
 #### :white_check_mark: NodeJS
 > Used for server
--
+
 #### :white_check_mark: ExpressJS
 > Used to handle http requests
--
+
 #### :white_check_mark: Rev.ai
 > Used to transcribe audio files (mp3, aac, etc.)
--
 
 ### :door: Gateways
 - Base url
