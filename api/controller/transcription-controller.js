@@ -42,8 +42,8 @@ export const transcribeAudio = async (req, res) => {
 
                 if(elements != null && elements.length > 0) {
                     elements.forEach(element => {
-                        if(element.type != "unknown" && element.type != "punct" && element.confidence >= 0.75)
-                            transcript += `${element.value.toLowerCase()} `;
+                        if(element.type != "unknown" && element.type != "punct")
+                            transcript += `${element.value.toLowerCase()}:${element.confidence} `;
                     });
 
                     transcript = transcript.substring(0, transcript.length - 1);
