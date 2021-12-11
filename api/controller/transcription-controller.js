@@ -15,7 +15,7 @@ export const transcribeAudio = async (req, res) => {
         // Job options
         let options = {
             skip_diarization: false,
-            skip_punctuation: true,
+            skip_punctuation: false,
             remove_disfluencies: true,
             delete_after_seconds: 30
         };
@@ -42,8 +42,8 @@ export const transcribeAudio = async (req, res) => {
 
                 if(elements != null && elements.length > 0) {
                     elements.forEach(element => {
-                        if(element.type != "unknown" && element.type != "punct")
-                            transcript += `${element.value.toLowerCase()}:${element.confidence} `;
+                        if(element.type != "unknown")
+                            transcript += element.value.toLowerCase();
                     });
 
                     transcript = transcript.substring(0, transcript.length - 1);
